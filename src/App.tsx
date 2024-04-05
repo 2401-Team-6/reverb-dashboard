@@ -1,4 +1,4 @@
-import { Flowbite } from "flowbite-react";
+import { Flowbite, useThemeMode } from "flowbite-react";
 import ConnectionModal from "./components/ConnectionModal";
 import { BrowserRouter as Router } from "react-router-dom";
 import flowbiteTheme from "./themes/flowbiteTheme";
@@ -9,17 +9,17 @@ import CategoryWindow from "./components/CategoryWindow";
 import { useEffect, useState } from "react";
 import { ApiResponse } from "./types/types";
 
-// Add event / cron type to function status for icons?
-// Create endpoint to get functions and events, for a "My Functions" and "My Events" tab? (Security issue?)
-//  If so, add link to funcName and eventName in LogViewer
-
 function App() {
   const [entries, setEntries] = useState<ApiResponse>({ logs: [] });
   const [openModal, setOpenModal] = useState(false);
+  const { mode, toggleMode } = useThemeMode();
 
   useEffect(() => {
-    localStorage.setItem("flowbite-theme-mode", "dark");
-  }, []);
+    if (mode !== "dark") {
+      localStorage.removeItem("flowbite-theme-mode");
+      toggleMode();
+    }
+  }, [mode]);
 
   return (
     <Router>

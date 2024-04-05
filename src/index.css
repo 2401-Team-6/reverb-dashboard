@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #25384d;
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.css-qmr40g,
+.css-1j0gro8 {
+  background-color: #030712 !important;
+}
+
+.contains-active svg:first-child {
+  color: #00e9ca !important;
+}
+
+#timeWindow > button > svg {
+  display: none;
+}
+
+/* .reverb-function-entry span[data-testid="flowbite-sidebar-label"] {
+  color: #22c55e;
+}
+
+.reverb-error-entry span[data-testid="flowbite-sidebar-label"] {
+  color: #dc2626;
+}
+
+.reverb-event-entry span[data-testid="flowbite-sidebar-label"] {
+  color: #facc15;
+} */

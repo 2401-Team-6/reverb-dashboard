@@ -36,7 +36,11 @@ export default function LogInfoWindow(props: { entries: ApiResponse }) {
         .get(
           JSON.parse(localStorage.getItem("apiUrl") || "") +
             selectedLog.links.logs,
-          { headers: { "x-api-key": localStorage.getItem("apiKey") } },
+          {
+            headers: {
+              "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
+            },
+          },
         )
         .then((res) => {
           setAdditionalLogs(res.data);

@@ -53,7 +53,7 @@ export default function LogSelectWindow(props: {
           validateStatus: (status) =>
             (status >= 200 && status < 300) || status === 404,
           headers: {
-            "x-api-key": localStorage.getItem("apiKey"),
+            "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
           },
         })
         .then((res) => {
@@ -114,7 +114,7 @@ export default function LogSelectWindow(props: {
           validateStatus: (status) =>
             (status >= 200 && status < 300) || status === 404,
           headers: {
-            "x-api-key": localStorage.getItem("apiKey"),
+            "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
           },
         })
         .then((res) => {

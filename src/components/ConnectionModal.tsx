@@ -14,7 +14,7 @@ export default function ConnectionModal(props: {
   const [key, setKey] = useState<string>("");
   const emailInputRef = useRef<HTMLInputElement>(null);
   const [apiUrl, setApiUrl] = useLocalStorage("apiUrl", "");
-  const [apiKey, setApiKey] = useLocalStorage("apiKey", "");
+  const [_apiKey, setApiKey] = useLocalStorage("apiKey", "");
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem("apiUrl") || ""))
@@ -31,7 +31,7 @@ export default function ConnectionModal(props: {
 
     if (validUrl(formUrl)) {
       const response = await axios.get(formUrl + "/logs/", {
-        headers: { "x-api-key": apiKey },
+        headers: { "x-api-key": key },
       });
       if (response.status.toString()[0] === "2") {
         setApiUrl(formUrl);

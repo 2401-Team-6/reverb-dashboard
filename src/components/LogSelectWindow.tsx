@@ -8,7 +8,13 @@ import { useEffect, useState } from "react";
 import { ApiResponse } from "../types/types";
 import { ScrollState } from "react-scrollbars-custom/dist/types/types";
 import VirtualScrollChild from "./VirtualScrollChild";
-import axios from "axios";
+import {
+  MOCK_ALL_LOGS,
+  MOCK_ERROR_LOGS,
+  MOCK_EVENT_LOGS,
+  MOCK_FUNCTION_LOGS,
+} from "../mock/mock-ui-data";
+// import axios from "axios";
 
 export default function LogSelectWindow(props: {
   entries: ApiResponse;
@@ -48,18 +54,41 @@ export default function LogSelectWindow(props: {
         from: searchParams.get("from") || "",
         to: searchParams.get("to") || "",
       });
-      axios
-        .get(apiUrl, {
-          validateStatus: (status) =>
-            (status >= 200 && status < 300) || status === 404,
-          headers: {
-            "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
-          },
-        })
-        .then((res) => {
-          setNextPage(res.data.links.next);
-          props.setEntries(res.data);
-        });
+
+      let mock;
+      switch (pathSegments[1]) {
+        case "events":
+          mock = MOCK_EVENT_LOGS;
+          break;
+        case "functions":
+          mock = MOCK_FUNCTION_LOGS;
+          break;
+        case "errors":
+          mock = MOCK_ERROR_LOGS;
+          break;
+        case "dead-letter":
+          mock = { logs: [], links: [] };
+          break;
+        default:
+          mock = MOCK_ALL_LOGS;
+      }
+
+      // @ts-ignore
+      props.setEntries(mock);
+      // @ts-ignore
+      setNextPage(mock.links?.next || "");
+      // axios
+      //   .get(apiUrl, {
+      //     validateStatus: (status) =>
+      //       (status >= 200 && status < 300) || status === 404,
+      //     headers: {
+      //       "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
+      //     },
+      //   })
+      //   .then((res) => {
+      //     setNextPage(res.data.links.next);
+      //     props.setEntries(res.data);
+      //   });
     }
   }, [url, searchParams]);
 
@@ -109,31 +138,38 @@ export default function LogSelectWindow(props: {
 
   function getNextPage() {
     if (nextPage) {
-      axios
-        .get(JSON.parse(localStorage.getItem("apiUrl") || "") + nextPage, {
-          validateStatus: (status) =>
-            (status >= 200 && status < 300) || status === 404,
-          headers: {
-            "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
-          },
-        })
-        .then((res) => {
-          if (res.status >= 200 && res.status < 300) {
-            const newLogs = res.data?.logs || [];
-            setNextPage(res.data.links.next);
+      console.log(nextPage);
+      // @ts-ignore
+      setNextPage("");
+      // @ts-ignore
+      props.setEntries((prev) => {
+        return { logs: props.entries.logs.concat(nextPage), links: {} };
+      });
+      // axios
+      //   .get(JSON.parse(localStorage.getItem("apiUrl") || "") + nextPage, {
+      //     validateStatus: (status) =>
+      //       (status >= 200 && status < 300) || status === 404,
+      //     headers: {
+      //       "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
+      //     },
+      //   })
+      //   .then((res) => {
+      //     if (res.status >= 200 && res.status < 300) {
+      //       const newLogs = res.data?.logs || [];
+      //       setNextPage(res.data.links.next);
 
-            props.setEntries((prevValue) => {
-              const uniqueLogs = Array.from(
-                new Set(
-                  prevValue.logs
-                    .map((log) => JSON.stringify(log))
-                    .concat(newLogs.map((log: any) => JSON.stringify(log))),
-                ),
-              ).map((log) => JSON.parse(log));
-              return { logs: uniqueLogs, links: res.data.links };
-            });
-          }
-        });
+      //       props.setEntries((prevValue) => {
+      //         const uniqueLogs = Array.from(
+      //           new Set(
+      //             prevValue.logs
+      //               .map((log) => JSON.stringify(log))
+      //               .concat(newLogs.map((log: any) => JSON.stringify(log))),
+      //           ),
+      //         ).map((log) => JSON.parse(log));
+      //         return { logs: uniqueLogs, links: res.data.links };
+      //       });
+      //     }
+      //   });
     }
   }
 

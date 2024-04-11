@@ -4,7 +4,7 @@ import { Button, Label, Modal, TextInput } from "flowbite-react";
 import React, { useRef, useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import axios from "axios";
+// import axios from "axios";
 
 export default function ConnectionModal(props: {
   openModal: boolean;
@@ -17,8 +17,10 @@ export default function ConnectionModal(props: {
   const [_apiKey, setApiKey] = useLocalStorage("apiKey", "");
 
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem("apiUrl") || ""))
-      props.setOpenModal(true);
+    // if (!JSON.parse(localStorage.getItem("apiUrl") || ""))
+    //   props.setOpenModal(true);
+
+    props.setOpenModal(false);
   }, []);
 
   useEffect(() => {
@@ -30,18 +32,18 @@ export default function ConnectionModal(props: {
     let formUrl = formatUrl(url);
 
     if (validUrl(formUrl)) {
-      const response = await axios.get(formUrl + "/logs/", {
-        headers: { "x-api-key": key },
-      });
-      if (response.status.toString()[0] === "2") {
-        setApiUrl(formUrl);
-        setApiKey(key);
-        props.setOpenModal(false);
-      } else {
-        alert("URL returned invalid response");
-      }
-    } else {
-      alert("Invalid URL");
+    //   const response = await axios.get(formUrl + "/logs/", {
+    //     headers: { "x-api-key": key },
+    //   });
+    //   if (response.status.toString()[0] === "2") {
+    //     setApiUrl(formUrl);
+    //     setApiKey(key);
+    //     props.setOpenModal(false);
+    //   } else {
+    //     alert("URL returned invalid response");
+    //   }
+    // } else {
+    //   alert("Invalid URL");
     }
   }
 

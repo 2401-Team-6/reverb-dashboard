@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import DotDivider from "./DotDivider";
 import { ApiResponse } from "../types/types";
-import axios from "axios";
+import { MOCK_FUNCTION_DETAIL_LOG } from "../mock/mock-ui-data";
+// import axios from "axios";
 
 export default function LogInfoWindow(props: { entries: ApiResponse }) {
   const url = useLocation();
@@ -30,21 +31,23 @@ export default function LogInfoWindow(props: { entries: ApiResponse }) {
 
   useEffect(() => {
     if (selectedLog?.links.logs) {
-      if (!JSON.parse(localStorage.getItem("apiUrl") || "")) return;
+      // if (!JSON.parse(localStorage.getItem("apiUrl") || "")) return;
 
-      axios
-        .get(
-          JSON.parse(localStorage.getItem("apiUrl") || "") +
-            selectedLog.links.logs,
-          {
-            headers: {
-              "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
-            },
-          },
-        )
-        .then((res) => {
-          setAdditionalLogs(res.data);
-        });
+      setAdditionalLogs(MOCK_FUNCTION_DETAIL_LOG);
+
+      // axios
+      //   .get(
+      //     JSON.parse(localStorage.getItem("apiUrl") || "") +
+      //       selectedLog.links.logs,
+      //     {
+      //       headers: {
+      //         "x-api-key": JSON.parse(localStorage.getItem("apiKey") || ""),
+      //       },
+      //     },
+      //   )
+      //   .then((res) => {
+      //     setAdditionalLogs(res.data);
+      //   });
     }
   }, [selectedLog]);
 

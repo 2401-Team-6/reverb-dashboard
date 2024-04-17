@@ -5,6 +5,8 @@ const NAV_LINKS = ["Logs", "Docs", "Case Study", "Connect to API"];
 export default function Header(props: {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const docsUrl = "https://github.com/reverb-app";
+
   return (
     <header className="font-sans">
       <Navbar fluid rounded>
@@ -22,7 +24,9 @@ export default function Header(props: {
           <Navbar.Link as="button" active>
             Logs
           </Navbar.Link>
-          <Navbar.Link as="button">Docs</Navbar.Link>
+          <a href={docsUrl} target="_blank" rel="noopener noreferrer">
+            <Navbar.Link as="button">Docs</Navbar.Link>
+          </a>
           <Navbar.Link as="button">Case Study</Navbar.Link>
           <Navbar.Link
             as="button"

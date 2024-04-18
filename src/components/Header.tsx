@@ -6,6 +6,8 @@ export default function Header(props: {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const docsUrl = "https://github.com/reverb-app";
+  const staticUrl = "https://reverb-app.github.io";
+
 
   return (
     <header className="font-sans">
@@ -27,7 +29,9 @@ export default function Header(props: {
           <a href={docsUrl} target="_blank" rel="noopener noreferrer">
             <Navbar.Link as="button">Docs</Navbar.Link>
           </a>
-          <Navbar.Link as="button">Case Study</Navbar.Link>
+          <a href={staticUrl} target="_blank" rel="noopener noreferrer">
+            <Navbar.Link as="button">Case Study</Navbar.Link>
+          </a>
           <Navbar.Link
             as="button"
             onClick={() => {

@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# Reverb - Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This server hosts the [**Reverb**](https://github.com/reverb-app/reverb) dashboard to visualize logs and monitor workflow state. The dashboard allows the user to quickly see a function's status and offers robust filtering tools.
 
-Currently, two official plugins are available:
+## Install
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project uses [node](http://nodejs.org/) and [npm](https://www.npmjs.com/).
 
-## Expanding the ESLint configuration
+To install, inside any directory, run:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
+```sh
+$ npx @reverb-app/reverb-dashboard
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+This will create a subdirectory named `reverb-dashboard`. Go to this directory and run:
+
+```sh
+$ npm install
+```
+
+## Usage
+
+### Running the Dashboard Server
+
+To initialize the Dashboard Server in a development environment, from the subdirectory named `reverb-dashboard`, run:
+
+```
+$ npm run dev
+```
+
+This will boot up the server on the standard Vite port. When you open it, you will be prompted for a URL and an API key, which you will have received after successfully [deploying](https://github.com/reverb-app/reverb) **Reverb**.

@@ -1,6 +1,12 @@
 # Reverb - Dashboard
 
-This server hosts the [**Reverb**](https://github.com/reverb-app/reverb) dashboard to visualize logs and monitor workflow state. The dashboard allows the user to quickly see a function's status and offers robust filtering tools.
+This server hosts the [**Reverb**](https://github.com/reverb-app/reverb) dashboard to visualize logs and monitor workflow state. The dashboard allows the user to quickly see and filter:
+
+- Events
+- Functions and their status
+- Error logs
+- the Dead Letter Queue
+- All Logs
 
 ## Install
 
@@ -28,4 +34,6 @@ To initialize the Dashboard Server in a development environment, from the subdir
 $ npm run dev
 ```
 
-This will boot up the server on the standard Vite port. When you open it, you will be prompted for a URL and an API key, which you will have received after successfully [deploying](https://github.com/reverb-app/reverb) **Reverb**.
+This will boot up the server on the standard Vite port, which is 5173. When you open it, you will be prompted for a URL and an API key, which you will have received after successfully [deploying](https://github.com/reverb-app/reverb) **Reverb**.
+
+Note that you will not need to enter an API key when you are running **Reverb** locally.

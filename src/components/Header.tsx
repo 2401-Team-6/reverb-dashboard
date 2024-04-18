@@ -6,7 +6,7 @@ export default function Header(props: {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const docsUrl = "https://github.com/reverb-app";
-  const staticUrl = "https://reverb-app.github.io/";
+  const staticUrl = "https://reverb-app.github.io";
 
 
   return (
